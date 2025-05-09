@@ -38,6 +38,8 @@ not(i,a);
 
 endmodule
 
+
+
 Half Adder
 
 Logic Diagram
