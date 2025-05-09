@@ -1,0 +1,236 @@
+Basic Logic Gates
+
+Logic Diagram
+
+AND
+
+OR
+
+NOR
+
+NOT
+
+NAND
+
+XOR
+
+Program
+
+module gates(a,b,c,d,e,f,g,h,i);
+
+input a,b;
+
+output c,d,e,f,g,h,i;
+
+and(c,a,b);
+
+or(d,a,b);
+
+nor(e,a,b);
+
+nand(f,a,b);
+
+xor(g,a,b);
+
+xnor(h,a,b);
+
+not(i,a);
+
+endmodule
+
+Half Adder
+
+Logic Diagram
+
+A
+
+SUM
+
+CARRY
+
+Program
+
+module ha(a, b, s, c);
+
+input a; input b;
+
+output s; output c;
+
+reg s,c;
+
+always@(a or b)
+
+begin
+
+s=a^b;
+
+c=a&b;
+
+end
+
+endmodule
+
+
+
+
+Full adder
+
+Logic Diagram
+
+C
+
+Program
+
+module fabe(a, b, c, sum, carry);
+
+input a; input b; input c;
+
+output sum; output carry;
+
+wire wl,w2,w3;
+
+assign sum=(a^b)^c;
+
+assign wl=a^b;
+
+
+
+
+Multiplexer
+
+Legic Diagram
+
+00000000
+
+Pregram
+
+module mrx3( select, d, q);
+
+imput[2:0] select:
+
+imput[7:0] d.
+
+output q.
+
+reg q wire[2:0] select;
+
+wire[7:0] d;
+
+always select or d)
+
+begin
+
+if select- 0)
+
+else if select1)
+
+q-d[1]:
+
+else ift select-2)
+
+4-d[2]
+
+else if(select-3)
+
+else iff select 4)
+
+৭ else if(select-5)
+
+else if select-6)
+
+q-d[6]:
+
+else
+
+9-17):
+
+end
+
+endmodule
+
+
+
+
+De-Multiplexer
+
+Logic Diagram
+
+DATAD
+
+Y_{0}
+
+Program
+
+module demux (s2,s1,1,en,y0,y1,y2,y3)
+
+input s 2,s1,I,en;
+
+output y 0,y1,y2,y3;
+
+assign y0= (- s * 2) \&(-s1)\& 1& en;
+
+assign y!= (- s * 2) \&s1 delta l& en;
+
+assign y2=s2\&( - s |)\& I & en;
+
+assign y 3=s2\& sl & I & en;
+
+endmodule
+
+
+
+
+Encoder
+
+Logic Diagram
+
+Program
+
+module encwtoutprio(a,en,y);
+
+input [7:0] a;
+
+input en;
+
+output reg [2:0] y;
+
+always@(a or en)
+
+begin
+
+if(!en)
+
+else
+
+y<=1'b0;
+
+case(a)
+
+
+
+
+Decoder
+
+Logic Diagram
+
+2
+
+gamma_{1}
+
+Program
+
+module decoder2_4 4(a, b, w, x, y, z)
+
+output w,x,y,z;
+
+input a,b;
+
+assign w =( neg a)\&( neg b);
+
+assign x =( neg a) & b;
+
+assign y =a\& ~b);
+
+assign z =a\&| ;
+
+endmodule
