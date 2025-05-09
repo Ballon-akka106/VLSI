@@ -95,6 +95,13 @@ assign sum=(a^b)^c;
 
 assign wl=a^b;
 
+assign w 2=a\&b
+
+assign w 3=w1\&c
+
+assign carry-w2/w3;
+
+endmodule
 
 
 
