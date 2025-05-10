@@ -266,3 +266,422 @@ assign y =a\& ~b);
 assign z =a\&| ;
 
 endmodule
+
+
+sim of 8 bit adder
+Program
+
+module adder(s,cout,a,b,cin);
+
+output[7:0]s;
+
+output cout;
+
+input[7:0]a,b;
+
+input cin;
+
+wire c1,c2,c3,c4,c5,c6,c7;
+
+fulladd fa0(s[0],c1,a[0],b[0],cin);
+
+fulladd fal(s[1],c2,a[1],b[1],c1);
+
+fulladd fa2(s[2],c3,a[2],b[2],c2);
+
+fulladd fa3(s[3],c4,a[3],b[3],c3);
+
+fulladd fa4(s[4],c5,a[4],b[4],c4);
+
+fulladd fa5(s[5],c6,a[5],b[5],c5);
+
+fulladd fa6(s[6],c7,a[6],b[6],c6);
+
+fulladd fa7(s[7],cout,a[7],b[7],c7);
+
+endmodule
+
+
+sim of multilier
+4 Bit Multiplier
+
+module multi(m,a,b);
+
+input [3:0]b;
+
+EXCELLENCE BEYOND EX
+
+output [7:0]m;
+
+wire [15:0]p;
+
+wire [12:1]s;
+
+wire [12:1]c;
+
+and(p[0],a[0],b[0]);
+
+and(p[1],a[1],b[0]);
+
+and(p[2],a[0],b[1]);
+
+and(p[3],a[2],b[0]);
+
+and(p[4],a[1],b[1]);
+
+and(p[5],a[0],b[2]);
+
+and(p[6],a[3],b[0]);
+
+and(p[7],a[2],b[1]);
+
+and(p[8],a[1],b[2]);
+
+and(p[9],a[0],b[3]);
+
+and(p[10],a[3],b[1]);
+
+and(p[11],a[2],b[2]);
+
+and(p[12],a[1],b[3]);
+
+and(p[13],a[3],b[2]);
+
+and(p[14],a[2],b[3]);
+
+and(p[15],a[3],b[3]);
+
+half hal(s[1],c[1],p[1],p[2]);
+
+half ha2(s[2],c[2],p[4],p[3]);
+
+half ha3(s[3],c[3],p[7],p[6]);
+
+full fa4(s[4],c[4],p[11],p[10],c[3]);
+
+full fa5(s[5],c[5],p[14],p[13],c[4]);
+full fa6(s[6],c[6],p[5],s[2],c[1]);
+
+full fa7(s[7],c[7],p[8],s[3],c[2]);
+
+full fa8(s[8],c[8],p[12],s[4],c[7]);
+
+full fa9(s[9],c[9],p[9],s[7],c[6]);
+
+half ha10(s[10],c[10],s[8],c[9]);
+
+full fall(s[11],c[11], s[5],c[8],c[10]);
+
+full fa12(s[12],c[12],p[15],s[5],c[11]);
+
+buf(m[0],p[0]);
+
+buf(m[1],s[1]);
+
+buf(m[2],s[6]);
+
+buf(m[3],s[9]);
+
+buf(m[4],s[10]);
+
+buf(m[5],s[11]);
+
+buf(m[6],s[12]);
+
+buf(m[7],c[12]);
+
+endmodule
+
+arthimetic and logical unit
+Program
+
+module alu(s,a,b,f);
+
+input[2:0]s;
+
+input[3:0]a,b;
+
+output[3:0]f;
+
+reg[3:0]f;
+
+always@(s or a or b)
+
+begin
+
+case(s)
+
+3'b000: f<= 4' b0000
+
+3'b001: f <= a - b
+
+3'b010: <= a + b ;
+
+3'b011: f <= b - a
+
+3'b100: f <=a\&b;
+
+3'b101 : f <=a|b
+
+3'b110: f <= sim a;
+default:f<=4'b1111;
+
+endcase
+
+end
+
+endmodule
+
+
+
+sim of sequential circuits
+Program
+
+module t(q,q1,t,c);
+
+output q,q1;
+
+input t,c;
+
+reg q,q1;
+
+initial
+
+begin
+
+q=1'b1;
+
+q1=1'b0;
+
+end
+
+always @ (c)
+
+begin
+
+if(c)
+
+begin
+
+if (t=1'b0)
+
+begin q=q; q1=q1;
+
+end
+
+else
+
+begin q=~q; q1=~q1;
+
+end 
+end
+end module
+
+
+sim of universal shift register
+Program
+
+module USR(A,g,clk, SLin, SRin, mode);
+
+wire[3:0]w;
+
+input[3:0]g;
+
+input[1:0]mode;
+
+input clk;
+
+input SLin, SRin;
+
+output [3:0]A;
+
+mux4_1 M0(w[0],A[0], A[1],SLin,g[0],mode);
+
+mux4_1 M1(w[1],A[1], A[2], A[0],g[1],mode);
+
+mux4 1 M2(w[2],A[2], A[3], A[1],[2],mode);
+
+mux4_1 M3(w[3], A[3],SRin, A[2],[3],mode);
+
+dfff D0(A[0],w[0],clk);
+
+dfff D1(A[1],w[1],clk);
+dfff D2(A[2],w[2],clk);
+
+dfff D3(A[3],w[3],clk);
+
+endmodule
+
+module mux4_1(y,10,11,12,13,mode);
+
+input 10,11,12,13;
+
+input [1:0]mode;
+
+output reg y;
+
+always@(mode,i3,12,11,10)
+
+begin end
+
+case(mode)
+
+2'b00:y=i0;
+
+2'b01:y=i1;
+
+2'b10:y=i2;
+
+2'b11:y=i3;
+
+endcase
+
+endmodule
+
+module dfff(q,d,clk);
+
+input d,clk;
+
+output reg q;
+
+always@(posedge clk)
+
+q<=d;
+
+endmodule
+
+
+sim of memories
+Program:
+module rom(addr, data,rd_en,cs);
+
+input[2:0]addr;
+
+input rd_en,cs;
+
+output reg[7:0]data;
+
+LLE
+
+KIT
+
+always@(addr or rd_en or cs)
+
+case(addr)
+
+0:data=12;
+
+1:data=14;
+
+2:data=16;
+
+3:data=18;
+
+4:data-20;
+
+5:data=22;
+
+6:data=24;
+
+7:data=26;
+
+endcase
+
+endmodule
+
+synthesis of combination circuits
+8 Bit Adder
+
+Program
+
+module adder(s,cout,a,b,cin);
+
+output[7:0]s;
+
+outputcout;
+
+input[7:0]a,b;
+
+inputcin;
+
+wire c1,c2,c3,c4,c5,c6,c7;
+
+fulladd fa0(s[0],c1,a[0],b[0],cin);
+
+fulladd fal(s[1],c2,a[1],b[1],c1);
+
+fulladd fa2(s[2],c3,a[2],b[2],c2);
+
+fulladd fa3(s[3],c4,a[3],b[3],c3);
+
+fulladd fa4(s[4],c5,a[4],b[4],c4);
+
+fulladd fa5(s[5],c6,a[5],b[5],c5);
+
+fulladd fa6(s[6],c7,a[6],b[6],c6);
+
+fulladd fa7(s[7],cout,a[7],b[7],c7);
+
+endmodule
+
+modulefulladd(s,cout,a,b,cin);
+
+outputs,cout;
+
+inputa,b,cin;
+
+xor (s,a,b,cin);
+
+assigncout = ((a & b )|(b&cin)(a&cin));
+
+endmodule
+
+
+place root and post place root sim
+8 Bit Adder
+
+module adder(s,cout,a,b,cin);
+
+output[7:0]s;
+
+outputcout;
+
+input[7:0]a,b;
+
+inputcin;
+
+wire cl,c2,c3,c4,c5,c6,c7;
+
+fulladd fa0(s[0],c1,a[0],b[0],cin);
+
+fulladd fal (s[1],c2,a[1],b[1],c1);
+
+fulladd fa2(s[2],c3,a[2],b[2],c2);
+
+fulladd fa3(s[3],c4,a[3],b[3],c3);
+
+fulladd fa4(s[4],c5,a[4],b[4],c4);
+
+fulladd fa5(s[5],c6,a[5],b[5],c5);
+
+fulladd fa6(s[6],c7,a[6],b[6],c6);
+
+fulladd fa7(s[7],cout,a[7],b[7],c7);
+
+endmodule
+
+modulefulladd(s,cout,a,b,cin);
+
+outputs,cout;
+
+inputa,b,cin;
+
+xor (s,a,b,cin);
+
+BEYOND
+
+assigncout = ((a & b)|(b&cin)|(a &cin));
+
+endmodule
+
+
